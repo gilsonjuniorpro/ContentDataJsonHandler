@@ -1,0 +1,105 @@
+{
+   "data":[
+      {
+         "_id":"B83A8257-C000-4763-9A37-1D50E27F8314",
+         "contextValues":{
+            "cvGoalCurrentAmount":"252",
+            "cvGoalEndDate":"1620185992",
+            "cvGoalEnteredAmount":"500",
+            "cvGoalEnteredCategory":"Travel",
+            "cvGoalStartDate":"1614915592",
+            "cvIsGoalSet":""
+         },
+         "defaults":{
+            "txtCurrency":"AED",
+            "numGoalFailedDurationMessage":10,
+            "numGoalMetDurationMessage":10
+         },
+         "goalFailed":{
+            "localizations":{
+               "en":{
+                  "btnGoalFailed":"Set a new goal",
+                  "txtGoalFailedDesc":"Your goal has ended",
+                  "txtGoalFailedTitle":"You only earned 252 AED out of 500"
+               }
+            }
+         },
+         "goalMet":{
+            "localizations":{
+               "en":{
+                  "btnGoalMet":"Set a new goal",
+                  "txtGoalMetTitle":"Congratulations"
+               }
+            }
+         },
+         "goalProgress":{
+            "localizations":{
+               "en":{
+                  "txtGoalProgress":"Cashback Earned since",
+                  "txtGoalProgressDesc":"Cashback Goal"
+               }
+            }
+         },
+         "goalSet":{
+            "goalSetEditor":{
+               "goalAmount":{
+                  "numGoalAmountDefault":100,
+                  "numGoalAmountIncrement":10
+               },
+               "goalDurations":[
+                  {
+                     "localizations":{
+                        "en":{
+                           "txtGoalDuration":"1 month"
+                        }
+                     },
+                     "numGoalDuration":30
+                  },
+                  {
+                     "localizations":{
+                        "en":{
+                           "txtGoalDuration":"2 months"
+                        }
+                     },
+                     "numGoalDuration":60
+                  },
+                  {
+                     "localizations":{
+                        "en":{
+                           "txtGoalDuration":"3 months"
+                        }
+                     },
+                     "numGoalDuration":90
+                  }
+               ]
+            },
+            "localizations":{
+               "en":{
+                  "btnGoalSet":"Set a goal now",
+                  "imgGoalSet":"https://flybits-development-file-manager.s3.amazonaws.com/file-manager-v3-dev/B5E1C841-AF9C-43E1-B3F3-F908B97A5466.png",
+                  "txtGoalSetDesc":"Earn cashback and save for your next big thing",
+                  "txtGoalSetTitle":"Set a goal"
+               }
+            }
+         },
+         "goalSetCategories":[
+            {
+               "localizations":{
+                  "en":{
+                     "imgCategory":"https://flybits-development-file-manager.s3.amazonaws.com/file-manager-v3-dev/CED6B0C9-BC8B-4DEF-91CC-9BA247559B4C.png",
+                     "imgCategoryGoalMet":"https://flybits-development-file-manager.s3.amazonaws.com/file-manager-v3-dev/EAB041CF-C479-4822-AEBC-1AE060279D41.png",
+                     "txtCategory":"Travel",
+                     "txtCategoryGoalMet":"You've saved 500 AED for your next trip!"
+                  }
+               },
+               "txtCategoryID":"travel"
+            }
+         ],
+         "goalSetCategories.pagination":{
+            "limit":20,
+            "offset":0,
+            "totalRecords":1
+         }
+      }
+   ]
+}
