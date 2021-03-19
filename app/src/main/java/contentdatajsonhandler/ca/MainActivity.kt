@@ -3,7 +3,6 @@ package contentdatajsonhandler.ca
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.gson.Gson
 import org.json.JSONObject
 import java.io.BufferedReader
 
@@ -16,8 +15,6 @@ class MainActivity : AppCompatActivity() {
         val mJSONObject = JSONObject(stringTemplate)
 
         val listData = parseJsonResult(mJSONObject)
-        //parseJsonResultGson(mJSONObject)
-
 
         println(listData.toString())
     }
@@ -141,10 +138,13 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
 
-                val goalSetCategoriesJsonObject = jsonObject.getJSONArray("goalSetCategories")
-                val goalSetCategoriesPaginationJsonObject = jsonObject.getJSONObject("goalSetCategories.pagination")
+                //val goalSetCategoriesJsonObject = jsonObject.getJSONArray("goalSetCategories")
+                //val goalSetCategoriesPaginationJsonObject = jsonObject.getJSONObject("goalSetCategories.pagination")
 
-                /*listData.add(
+                val goalSetCategories = null
+                val goalSetCategoriesPagination = null
+
+                listData.add(
                     Data(
                         id,
                         contextValues,
@@ -156,30 +156,12 @@ class MainActivity : AppCompatActivity() {
                         goalSetCategories,
                         goalSetCategoriesPagination
                     )
-                )*/
+                )
             }
 
             return listData
         }
     }
-
-    //parsing without Gson
-    /*fun parseJsonResultGson(jsonResult: JSONObject): ArrayList<Data> {
-        val data = jsonResult.getJSONArray("data")
-
-        val listData = ArrayList<Data>()
-
-        for (i in 0 until data.length()) {
-            val jsonObject = data.getJSONObject(i)
-            val id = jsonObject.getString("_id")
-
-            val dataString:String = Gson().toJson(jsonObject)
-            val data = Gson().fromJson(dataString, Data::class.java)
-
-            listData.add(data)
-        }
-        return listData
-    }*/
 }
 
 fun readAsset(context: Context): String {
