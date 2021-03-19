@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         println(listData.toString())
     }
 
-
     companion object {
         fun parseJsonResult(jsonResult: JSONObject): ArrayList<Data> {
             val data = jsonResult.getJSONArray("data")
@@ -205,7 +204,7 @@ class MainActivity : AppCompatActivity() {
 
 fun readAsset(context: Context): String {
     return context.assets
-            .open("ContentData.json")
+            .open("MockContentData.json")
             .bufferedReader()
             .use(BufferedReader::readText)
 }
