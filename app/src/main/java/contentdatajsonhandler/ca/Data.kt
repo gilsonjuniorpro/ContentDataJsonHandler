@@ -1,9 +1,5 @@
 package contentdatajsonhandler.ca
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
 data class Data(
     val id: String,
     val contextValues: ContextValues? = null,
@@ -12,6 +8,6 @@ data class Data(
     val goalMet: GoalMet? = null,
     val goalProgress: GoalProgress? = null,
     val goalSet: GoalSet? = null,
-    val goalSetCategories: GoalSetCategories? = null,
+    val goalSetCategories: List<GoalSetCategories>? = listOf(),
     val goalSetCategoriesPagination: GoalSetCategoriesPagination? = null
-): Parcelable
+)

@@ -1,9 +1,6 @@
 package contentdatajsonhandler.ca
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
+//this was the first approach, not using this class
 data class Language(
     val btnGoalFailed: String? = "",
     val txtGoalFailedDesc: String? = "",
@@ -21,4 +18,4 @@ data class Language(
     val imgCategoryGoalMet: String? = "",
     val txtCategory: String? = "",
     val txtCategoryGoalMet: String? = "",
-): Parcelable
+)

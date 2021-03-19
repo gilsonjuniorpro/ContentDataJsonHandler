@@ -48,25 +48,25 @@ class MainActivity : AppCompatActivity() {
                     )
 
                 val goalFailedJsonObject = jsonObject.getJSONObject("goalFailed")
-                val localizationsFailedJsonObject = goalFailedJsonObject.getJSONObject("localizations")
-                val englishFailedJsonObject = localizationsFailedJsonObject.getJSONObject("en")
-                val languageEnFailed = Language(
-                    btnGoalFailed = englishFailedJsonObject.getString("btnGoalFailed"),
-                    txtGoalFailedDesc = englishFailedJsonObject.getString("txtGoalFailedDesc"),
-                    txtGoalFailedTitle = englishFailedJsonObject.getString("txtGoalFailedTitle")
+                val localizationsGoalFailedJsonObject = goalFailedJsonObject.getJSONObject("localizations")
+                val englishGoalFailedJsonObject = localizationsGoalFailedJsonObject.getJSONObject("en")
+                val languageEnGoalFailed = LanguageGoalFailed(
+                    btnGoalFailed = englishGoalFailedJsonObject.getString("btnGoalFailed"),
+                    txtGoalFailedDesc = englishGoalFailedJsonObject.getString("txtGoalFailedDesc"),
+                    txtGoalFailedTitle = englishGoalFailedJsonObject.getString("txtGoalFailedTitle")
                 )
                 val goalFailed = GoalFailed(
                     Localizations(
-                       english = languageEnFailed
+                       english = languageEnGoalFailed
                     )
                 )
 
                 val goalMetJsonObject = jsonObject.getJSONObject("goalMet")
-                val localizationsMetJsonObject = goalMetJsonObject.getJSONObject("localizations")
-                val englishMetJsonObject = localizationsMetJsonObject.getJSONObject("en")
-                val languageMet = Language(
-                    btnGoalMet = englishMetJsonObject.getString("btnGoalMet"),
-                    txtGoalMetTitle = englishMetJsonObject.getString("txtGoalMetTitle")
+                val localizationsGoalMetJsonObject = goalMetJsonObject.getJSONObject("localizations")
+                val englishGoalMetJsonObject = localizationsGoalMetJsonObject.getJSONObject("en")
+                val languageMet = LanguageGoalMet(
+                    btnGoalMet = englishGoalMetJsonObject.getString("btnGoalMet"),
+                    txtGoalMetTitle = englishGoalMetJsonObject.getString("txtGoalMetTitle")
                 )
                 val goalMet = GoalMet(
                     Localizations(
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 val goalProgressJsonObject = jsonObject.getJSONObject("goalProgress")
                 val localizationsGoalProgressJsonObject = goalProgressJsonObject.getJSONObject("localizations")
                 val englishGoalProgressJsonObject = localizationsGoalProgressJsonObject.getJSONObject("en")
-                val languageGoalProgress = Language(
+                val languageGoalProgress = LanguageGoalProgress(
                     txtGoalProgress = englishGoalProgressJsonObject.getString("txtGoalProgress"),
                     txtGoalProgressDesc = englishGoalProgressJsonObject.getString("txtGoalProgressDesc")
                 )
@@ -95,14 +95,13 @@ class MainActivity : AppCompatActivity() {
                     numGoalAmountIncrement = goalAmountJsonObject.getString("numGoalAmountIncrement"),
                 )
 
-
                 val listGoalDurations = mutableListOf<GoalDurations>()
                 val listGoalDurationsJsonObject = goalSetEditorJsonObject.getJSONArray("goalDurations")
                 for (a in 0 until listGoalDurationsJsonObject.length()) {
-                    val listEnglishGoalDurations = listGoalDurationsJsonObject.getJSONObject(i)
+                    val listEnglishGoalDurations = listGoalDurationsJsonObject.getJSONObject(a)
                     val localizationsGoalDurationsJsonObject = listEnglishGoalDurations.getJSONObject("localizations")
                     val englishGoalDurationsJsonObject = localizationsGoalDurationsJsonObject.getJSONObject("en")
-                    val languageGoalDuration = Language(
+                    val languageGoalDuration = LanguageGoalDuration(
                         txtGoalDuration = englishGoalDurationsJsonObject.getString("txtGoalDuration")
                     )
                     val localizations = Localizations(
@@ -119,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
                 val localizationsGoalSetJsonObject = goalSetJsonObject.getJSONObject("localizations")
                 val englishGoalSetJsonObject = localizationsGoalSetJsonObject.getJSONObject("en")
-                val languageGoalSet = Language(
+                val languageGoalSet = LanguageGoalSet(
                     btnGoalSet = englishGoalSetJsonObject.getString("btnGoalSet"),
                     imgGoalSet = englishGoalSetJsonObject.getString("imgGoalSet"),
                     txtGoalSetDesc = englishGoalSetJsonObject.getString("txtGoalSetDesc"),
@@ -138,11 +137,38 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
 
-                //val goalSetCategoriesJsonObject = jsonObject.getJSONArray("goalSetCategories")
-                //val goalSetCategoriesPaginationJsonObject = jsonObject.getJSONObject("goalSetCategories.pagination")
+                val listGoalSetCategories = mutableListOf<GoalSetCategories>()
+                val goalSetCategoriesJsonObject = jsonObject.getJSONArray("goalSetCategories")
+                for (b in 0 until goalSetCategoriesJsonObject.length()) {
+                    val listGoalSetCategoriesJsonObject = goalSetCategoriesJsonObject.getJSONObject(b)
+                    val localizationsGoalSetCategoriesJsonObject = listGoalSetCategoriesJsonObject.getJSONObject("localizations")
+                    val englishGoalSetCategoriesJsonObject = localizationsGoalSetCategoriesJsonObject.getJSONObject("en")
+                    val languageGoalSetCategories = LanguageCategory(
+                        imgCategory = englishGoalSetCategoriesJsonObject.getString("imgCategory"),
+                        imgCategoryGoalMet = englishGoalSetCategoriesJsonObject.getString("imgCategoryGoalMet"),
+                        txtCategory = englishGoalSetCategoriesJsonObject.getString("txtCategory"),
+                        txtCategoryGoalMet = englishGoalSetCategoriesJsonObject.getString("txtCategoryGoalMet")
+                    )
+                    val localizations = Localizations(
+                        english = languageGoalSetCategories
+                    )
 
-                val goalSetCategories = null
-                val goalSetCategoriesPagination = null
+                    val txtCategoryID = listGoalSetCategoriesJsonObject.getString("txtCategoryID")
+
+                    listGoalSetCategories.add(
+                        GoalSetCategories(
+                            localizations,
+                            txtCategoryID
+                        )
+                    )
+                }
+
+                val goalSetCategoriesPaginationJsonObject = jsonObject.getJSONObject("goalSetCategories.pagination")
+                val goalSetCategoriesPagination = GoalSetCategoriesPagination(
+                    limit =   goalSetCategoriesPaginationJsonObject.getString("limit"),
+                    offset =   goalSetCategoriesPaginationJsonObject.getString("offset"),
+                    totalRecords =   goalSetCategoriesPaginationJsonObject.getString("totalRecords"),
+                )
 
                 listData.add(
                     Data(
@@ -153,7 +179,7 @@ class MainActivity : AppCompatActivity() {
                         goalMet,
                         goalProgress,
                         goalSet,
-                        goalSetCategories,
+                        listGoalSetCategories,
                         goalSetCategoriesPagination
                     )
                 )
