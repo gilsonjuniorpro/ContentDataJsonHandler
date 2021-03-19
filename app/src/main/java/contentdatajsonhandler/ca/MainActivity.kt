@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         println(listData.toString())
     }
 
+
     companion object {
-        //parsing without Gson
         fun parseJsonResult(jsonResult: JSONObject): ArrayList<Data> {
             val data = jsonResult.getJSONArray("data")
 
@@ -31,21 +31,22 @@ class MainActivity : AppCompatActivity() {
                 val id = jsonObject.getString("_id")
 
                 val contextValuesJsonObject = jsonObject.getJSONObject("contextValues")
-                    val contextValues = ContextValues(
-                        contextValuesJsonObject.getString("cvGoalCurrentAmount"),
-                        contextValuesJsonObject.getString("cvGoalEndDate"),
-                        contextValuesJsonObject.getString("cvGoalEnteredAmount"),
-                        contextValuesJsonObject.getString("cvGoalEnteredCategory"),
-                        contextValuesJsonObject.getString("cvGoalStartDate"),
-                        contextValuesJsonObject.getString("cvIsGoalSet")
-                    )
+                //val contextValues = mappingContextValues(contextValuesJsonObject)
+                val contextValues = ContextValues(
+                    contextValuesJsonObject.getString("cvGoalCurrentAmount"),
+                    contextValuesJsonObject.getString("cvGoalEndDate"),
+                    contextValuesJsonObject.getString("cvGoalEnteredAmount"),
+                    contextValuesJsonObject.getString("cvGoalEnteredCategory"),
+                    contextValuesJsonObject.getString("cvGoalStartDate"),
+                    contextValuesJsonObject.getString("cvIsGoalSet")
+                )
 
                 val defaultsJsonObject = jsonObject.getJSONObject("defaults")
-                    val defaults = Defaults(
-                        defaultsJsonObject.getString("txtCurrency"),
-                        defaultsJsonObject.getString("numGoalFailedDurationMessage"),
-                        defaultsJsonObject.getString("numGoalMetDurationMessage")
-                    )
+                val defaults = Defaults(
+                    defaultsJsonObject.getString("txtCurrency"),
+                    defaultsJsonObject.getString("numGoalFailedDurationMessage"),
+                    defaultsJsonObject.getString("numGoalMetDurationMessage")
+                )
 
                 val goalFailedJsonObject = jsonObject.getJSONObject("goalFailed")
                 val localizationsGoalFailedJsonObject = goalFailedJsonObject.getJSONObject("localizations")
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 val goalFailed = GoalFailed(
                     Localizations(
-                       english = languageEnGoalFailed
+                        english = languageEnGoalFailed
                     )
                 )
 
@@ -186,6 +187,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             return listData
+        }
+
+        //in case we want to separate
+        fun mappingContextValues(contextValuesJsonObject: JSONObject): ContextValues {
+            return ContextValues(
+                contextValuesJsonObject.getString("cvGoalCurrentAmount"),
+                contextValuesJsonObject.getString("cvGoalEndDate"),
+                contextValuesJsonObject.getString("cvGoalEnteredAmount"),
+                contextValuesJsonObject.getString("cvGoalEnteredCategory"),
+                contextValuesJsonObject.getString("cvGoalStartDate"),
+                contextValuesJsonObject.getString("cvIsGoalSet")
+            )
         }
     }
 }
