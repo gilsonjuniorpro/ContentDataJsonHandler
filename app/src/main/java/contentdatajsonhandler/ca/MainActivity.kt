@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 val goalSetCategoriesJsonObject = jsonObject.getJSONArray("goalSetCategories")
                 val goalSetCategoriesPaginationJsonObject = jsonObject.getJSONObject("goalSetCategories.pagination")
 
-                listData.add(
+                /*listData.add(
                     Data(
                         id,
                         contextValues,
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                         goalSetCategories,
                         goalSetCategoriesPagination
                     )
-                )
+                )*/
             }
 
             return listData
