@@ -1,5 +1,9 @@
 package contentdatajsonhandler.ca
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class ContextValues(
     val cvGoalCurrentAmount: String?,
     val cvGoalEndDate: String?,
@@ -7,4 +11,4 @@ data class ContextValues(
     val cvGoalEnteredCategory: String?,
     val cvGoalStartDate: String?,
     val cvIsGoalSet: String?,
-)
+): Parcelable

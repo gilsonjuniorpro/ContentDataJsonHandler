@@ -3,6 +3,7 @@ package contentdatajsonhandler.ca
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.gson.Gson
 import org.json.JSONObject
 import java.io.BufferedReader
 
@@ -15,11 +16,14 @@ class MainActivity : AppCompatActivity() {
         val mJSONObject = JSONObject(stringTemplate)
 
         val listData = parseJsonResult(mJSONObject)
+        //parseJsonResultGson(mJSONObject)
+
 
         println(listData.toString())
     }
 
     companion object {
+        //parsing without Gson
         fun parseJsonResult(jsonResult: JSONObject): ArrayList<Data> {
             val data = jsonResult.getJSONArray("data")
 
@@ -73,9 +77,44 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
 
-
                 val goalProgressJsonObject = jsonObject.getJSONObject("goalProgress")
+                val localizationsGoalProgressJsonObject = goalProgressJsonObject.getJSONObject("localizations")
+                val englishGoalProgressJsonObject = localizationsGoalProgressJsonObject.getJSONObject("en")
+                val languageGoalProgress = Language(
+                    txtGoalProgress = englishGoalProgressJsonObject.getString("txtGoalProgress"),
+                    txtGoalProgressDesc = englishGoalProgressJsonObject.getString("txtGoalProgressDesc")
+                )
+                val goalProgress = GoalProgress(
+                    Localizations(
+                        english = languageGoalProgress
+                    )
+                )
+
                 val goalSetJsonObject = jsonObject.getJSONObject("goalSet")
+                val goalSetEditorJsonObject = goalSetJsonObject.getJSONObject("goalSetEditor")
+                val goalAmountJsonObject = goalSetEditorJsonObject.getJSONObject("goalAmount")
+                val goalAmount = GoalAmount(
+                    numGoalAmountDefault = goalAmountJsonObject.getString("numGoalAmountDefault"),
+                    numGoalAmountIncrement = goalAmountJsonObject.getString("numGoalAmountIncrement"),
+                )
+                val goalSetEditor = GoalSetEditor(
+                    goalAmount,
+                    listOf(),
+                )
+
+
+
+
+
+
+                val localizationsGoalProgressJsonObject = goalProgressJsonObject.getJSONObject("localizations")
+
+
+
+
+
+
+
                 val goalSetCategoriesJsonObject = jsonObject.getJSONArray("goalSetCategories")
                 val goalSetCategoriesPaginationJsonObject = jsonObject.getJSONObject("goalSetCategories.pagination")
 
@@ -86,10 +125,10 @@ class MainActivity : AppCompatActivity() {
                         defaults,
                         goalFailed,
                         goalMet,
-                        goalProgressJsonObject,
-                        goalSetJsonObject,
-                        goalSetCategoriesJsonObject,
-                        goalSetCategoriesPaginationJsonObject
+                        goalProgress,
+                        goalSet,
+                        goalSetCategories,
+                        goalSetCategoriesPagination
                     )
                 )
             }
@@ -97,6 +136,24 @@ class MainActivity : AppCompatActivity() {
             return listData
         }
     }
+
+    //parsing without Gson
+    /*fun parseJsonResultGson(jsonResult: JSONObject): ArrayList<Data> {
+        val data = jsonResult.getJSONArray("data")
+
+        val listData = ArrayList<Data>()
+
+        for (i in 0 until data.length()) {
+            val jsonObject = data.getJSONObject(i)
+            val id = jsonObject.getString("_id")
+
+            val dataString:String = Gson().toJson(jsonObject)
+            val data = Gson().fromJson(dataString, Data::class.java)
+
+            listData.add(data)
+        }
+        return listData
+    }*/
 }
 
 fun readAsset(context: Context): String {

@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class GoalFailed(
-    val localizations: Localizations?
+data class GoalAmount(
+    val numGoalAmountDefault: String? = "",
+    val numGoalAmountIncrement: String? = "",
 ): Parcelable

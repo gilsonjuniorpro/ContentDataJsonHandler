@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class GoalFailed(
-    val localizations: Localizations?
+data class GoalDurations(
+    val localizations: List<Localizations>? = listOf(),
+    val numGoalDuration: String? = ""
 ): Parcelable
